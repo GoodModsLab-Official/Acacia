@@ -1,7 +1,7 @@
 ![Acacia](GoodModsLab/title_logo_acacia.png)
 💚Interpreted programming language
 
-![Current version](https://img.shields.io/badge/GoodModsLab-v0.1.1-%2330BF84) ![Current version](https://img.shields.io/badge/Acacia-v0.1430b-%2330BF84)
+![Current version](https://img.shields.io/badge/AcaciaX-v0.1-%2330BF84) ![Current version](https://img.shields.io/badge/Acacia-v0.1-%2330BF84)
 ![GitHub followers](https://img.shields.io/github/followers/GoodModsLab-Official?style=social) 
 ![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCWMQHUQ3-Of_pYqNvXZHqFQ?style=social)
 
@@ -20,7 +20,7 @@ The Acacia programming language is closely related to the launcher GoodModsLab.
 
 <a name="Advantages"></a>
 ## Why exactly Acacia?
-[Acacia](https://goodmodslab-official.github.io) — An interpreted programming language that is statistically typed. Has free contextual syntax, that is, you can create your own code style. Acacia has work with requests, matrix and everything you need to create modifications for games and applications. See for yourself! 
+[Acacia](https://goodmodslab-official.github.io) — An interpreted programming language that is dynamic typing. Has free contextual syntax, that is, you can create your own code style. Acacia has work with requests, matrix and everything you need to create modifications for games and applications. See for yourself! 
 
 <a name="Docs Acacia"></a>
 ## Getting Acacia / Documentation

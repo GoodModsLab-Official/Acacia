@@ -1,0 +1,3 @@
+import astd
+import math
+print rand(0,5)

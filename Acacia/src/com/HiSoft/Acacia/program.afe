@@ -1,4 +1,0 @@
-Import math
-Import astd
-
-print(rand(0,9))

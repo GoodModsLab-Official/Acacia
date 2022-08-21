@@ -1,3 +1,4 @@
 import astd
 import math
-print rand(0,5)
+
+i = newArray(3,3)

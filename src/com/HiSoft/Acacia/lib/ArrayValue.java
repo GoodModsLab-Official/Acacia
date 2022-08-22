@@ -27,6 +27,24 @@ public final class ArrayValue implements Value {
         elements[index] = value;
     }
 
+    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + Arrays.deepHashCode(this.elements);
+        return hash;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final ArrayValue other = (ArrayValue) obj;
+        return Arrays.deepEquals(this.elements, other.elements);
+    }
+    
     @Override
     public double asNumber() {
         throw new RuntimeException("Cannot cast array to number");

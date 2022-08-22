@@ -32,4 +32,12 @@ public final class UserDefinedFunction implements Function {
             return rt.getResult();
         }
     }
+    
+    @Override
+    public String toString() {
+        if (body instanceof ReturnStatement) {
+            return String.format("def%s = %s", argNames, ((ReturnStatement)body).expression);
+        }
+        return String.format("def%s %s", argNames, body);
+    }
 }

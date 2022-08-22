@@ -1,8 +1,8 @@
 package com.HiSoft.Acacia.parser;
 
+import com.HiSoft.Acacia.lib.*;
 import com.HiSoft.Acacia.parser.ast.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 public final class Parser {
@@ -152,6 +152,19 @@ public final class Parser {
         return function;
     }
 
+    private Expression map() {
+        consume(TokenType.LBRACE);
+        final Map<Expression, Expression> elements = new HashMap<>();
+        while (!match(TokenType.RBRACE)) {
+            final Expression key = primary();
+            consume(TokenType.COLON);
+            final Expression value = expression();
+            elements.put(key, value);
+            match(TokenType.COMMA);
+        }
+        return new MapExpression(elements);
+    }
+    
     private Expression array() {
         consume(TokenType.LBRACKET);
         final List<Expression> elements = new ArrayList<>();
@@ -385,14 +398,17 @@ public final class Parser {
         if (match(TokenType.HEX_NUMBER)) {
             return new ValueExpression(Long.parseLong(current.getText(), 16));
         }
-        if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.LPAREN)) {
-            return function();
-        }
         if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.LBRACKET)) {
             return element();
         }
+        if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.LPAREN)) {
+            return function();
+        }
         if (lookMatch(0, TokenType.LBRACKET)) {
             return array();
+        }
+        if (lookMatch(0, TokenType.LBRACE)) {
+            return map();
         }
         if (match(TokenType.WORD)) {
             return new VariableExpression(current.getText());
@@ -404,6 +420,16 @@ public final class Parser {
             Expression result = expression();
             match(TokenType.RPAREN);
             return result;
+        }
+        if (match(TokenType.DEF)) {
+            consume(TokenType.LPAREN);
+            final List<String> argNames = new ArrayList<>();
+            while (!match(TokenType.RPAREN)) {
+                argNames.add(consume(TokenType.WORD).getText());
+                match(TokenType.COMMA);
+            }
+            final Statement body = statementOrBlock();
+            return new ValueExpression(new UserDefinedFunction(argNames, body));
         }
         throw new ParseException("Unknown expression: " + current);
     }

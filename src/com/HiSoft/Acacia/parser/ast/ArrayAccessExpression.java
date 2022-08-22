@@ -1,9 +1,7 @@
 package com.HiSoft.Acacia.parser.ast;
 
-import com.HiSoft.Acacia.lib.ArrayValue;
-import com.HiSoft.Acacia.lib.Value;
-import com.HiSoft.Acacia.lib.Variables;
-import java.util.List;
+import com.HiSoft.Acacia.lib.*;
+import java.util.*;
 
 
 public final class ArrayAccessExpression implements Expression {
@@ -18,7 +16,11 @@ public final class ArrayAccessExpression implements Expression {
 
     @Override
     public Value eval() {
-        return getArray().get(lastIndex());
+        Value container = Variables.get(variable);
+        if (container instanceof ArrayValue) {
+            return getArray().get(lastIndex());
+        }
+        return consumeMap(container).get(indices.get(0).eval());
     }
 
     public ArrayValue getArray() {
@@ -43,6 +45,14 @@ public final class ArrayAccessExpression implements Expression {
             return (ArrayValue) value;
         } else {
             throw new RuntimeException("Array expected");
+        }
+    }
+    
+    private MapValue consumeMap(Value value) {
+        if (value instanceof MapValue) {
+            return (MapValue) value;
+        } else {
+            throw new RuntimeException("Map expected");
         }
     }
 
